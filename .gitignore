@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/ContactService/bin/Debug/net8.0
+/ContactService/obj
+/Shared/bin/Debug/net8.0
+/Shared/obj
+/ReportService/bin/Debug/net8.0
+/ReportService/obj
