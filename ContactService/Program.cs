@@ -1,4 +1,7 @@
 using ContactService.Data;
+using ContactService.Services.Interfaces;
+using ContactService.Services;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +10,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("localhost", "/", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+    });
+});
+builder.Services.AddScoped<IReportRequestPublisher, ReportRequestPublisher>();
 
 // DB
 builder.Services.AddDbContext<AppDbContext>(options =>
