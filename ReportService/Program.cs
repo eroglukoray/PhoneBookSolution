@@ -33,6 +33,11 @@ builder.Services.AddMassTransit(x =>
     });
 });
 
+builder.Services.AddHttpClient("ContactService", client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["ContactService:BaseUrl"]!);
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

@@ -3,6 +3,7 @@ using ContactService.Services.Interfaces;
 using ContactService.Services;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using ContactService.Data.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
+// Seed Data
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    SeedData.Initialize(dbContext);
+}
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseAuthorization();

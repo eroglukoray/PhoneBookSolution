@@ -9,3 +9,5 @@
 /Shared/obj
 /ReportService/bin/Debug/net8.0
 /ReportService/obj
+/ContactService.Tests/bin/Debug/net8.0
+/ContactService.Tests/obj
